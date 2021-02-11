@@ -4,12 +4,17 @@ def interface():
         print("\nOptions")
         print("1 - HDL")
         print("2 - LDL")
+        print("3 - Total Cholesterol")
         print("9 - Quit")
         choice = input("Enter an option: ")
         if choice == "9": #9 is in quotes because input returns a string
             return
         elif choice == "1":
             HDL_driver()
+        elif choice == "2":
+            LDL_driver()
+        elif choice == "3":
+            total_driver()
 
 #Need to add functions that:            
     # Get data
@@ -17,31 +22,63 @@ def interface():
     # Output data
 
 def HDL_driver():  
-    HDL = get_HDL_input()
+    HDL = get_generic_input("HDL")
     analysis = analyze_HDL(HDL)
-    output_HDL(HDL, analysis)
+    output_generic("HDL",HDL, analysis)
 
-def get_HDL_input(): #input function
-    HDL = input("Enter HDL Level: ")
+def get_generic_input(test_name): #input function
+    HDL = input("Enter {} result: ".format(test_name))
     return int(HDL)
     
 def analyze_HDL(HDL): #analyze data
     if HDL >= 60:
-        print("Normal")
+        return "Normal"
     elif HDL < 40:
-        print("Low")
+        return "Low"
     else:
-        print("Borderline Low")
+        return "Borderline Low"
+    
+def output_generic(test_name, test_value, analysis):
+    print("The {} entered was {}".format(test_name,test_value))
+    print("This value is {}".format(analysis))
+    
+def LDL_driver():
+    LDL = get_generic_input("LDL")
+    analysis = analyze_LDL(LDL)
+    output_generic("LDL", LDL, analysis)
+    
+def analyze_LDL(LDL):
+    if LDL >= 190:
+        return "Very high"
+    elif 160 <= LDL < 190:
+        return "High"
+    elif 130 <= LDL < 160:
+        return "Borderline high"
+    else:
+        return "Normal"
         
-def output_HDL(HDL,analysis):
-    print("The HDL entered was {}".format(HDL))
-    print("The level is {}".format(analysis))      
+def analyze_total_cholesterol(total):
+    if total < 200:
+        return "Normal"
+    elif 200 <= total < 240:
+        return "Borderline high"
+    else:
+        return "High"
+        
 
-        
-interface()
-HDL_driver()
-get_HDL_input()
-analyze_HDL()
-output_HDL()
+def total_driver():
+    total_chol = get_generic_input("Total cholesterol")
+    analysis = analyze_total_cholesterol(total_chol)
+    output_generic("Total cholesterol", total_chol, analysis)
+    
+
+if __name__ == "__main__":        
+    interface()
+
+#
+#HDL_driver()
+#get_HDL_input()
+#analyze_HDL()
+#output_HDL()
 
 
