@@ -1,4 +1,3 @@
-#
 # Emma Cooper
 
 def my_function(x):
@@ -8,8 +7,8 @@ def my_function(x):
     else:
         answer = "positive number"
     return a, answer
-    
-    
+
+
 y = my_function(-20)
 print(y)
 print(y[0])
